@@ -9,5 +9,5 @@ def controller_api(app):
         if link is None:
             return {"ERROR": "Пустая ссылка."}
         result = app.get_long_link(link)
-        return {"response": app.get_short_link(link)}
+        return {"response": result}
     return api_get_link
