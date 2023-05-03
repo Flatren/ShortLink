@@ -29,10 +29,10 @@ class App:
         return result
 
     def get_hash_rand(self, link: str):
-        return self.to_number_systems(abs(hash(link)), self.shuffle_chars())
+        return self.to_number_systems(abs(hash(link))//(62*62*62*62*62*62), self.shuffle_chars())
 
     def get_hash_static(self, link: str):
-        return self.to_number_systems(abs(hash(link)), self.chars)
+        return self.to_number_systems(abs(hash(link))//(62*62*62*62*62*62), self.chars)
 
     def get_short_link(self, long_link: str):
         result_hash = self.get_hash_static(long_link)
