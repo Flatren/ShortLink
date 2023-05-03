@@ -1,6 +1,6 @@
 import logging
 import json
-from flask import request, Flask
+from flask import Flask
 from app import App
 import os
 from app.controllers.get_link_controller import controller_api as get_link_controller
