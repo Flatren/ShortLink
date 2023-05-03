@@ -1,0 +1,55 @@
+version: "3.0"
+services:
+  nginx:
+    build: ./nginx
+    networks:
+      default:
+        ipv4_address: 172.16.1.3
+    ports:
+      - "80:80"
+      - "443:443"
+  web:
+    build: ./frontend/link_short
+    ports:
+      - "8080:8080"
+    networks:
+      default:
+        ipv4_address: 172.16.1.5
+  postgres:
+    image: postgres:13.3
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres 
+      POSTGRES_DB: link_db
+    ports:
+      - "5432:5432"
+    networks:
+      default:
+        ipv4_address: 172.16.1.4
+  server:
+    build: ./backend
+    depends_on:
+      postgres:
+        condition: service_started
+    environment:
+      PORT_EXEC: 8000
+      DBNAME: link_db
+      HOST: 172.16.1.4
+      USER: postgres
+      PASSWORD: postgres
+      PORT: 5432
+    ports:
+      - "8000:8000"
+    networks:
+      default:
+        ipv4_address: 172.16.1.6
+    
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.1.0/24
+  
