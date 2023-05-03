@@ -6,7 +6,6 @@ services:
       default:
         ipv4_address: 172.16.1.3
     ports:
-      - "80:80"
       - "443:443"
   web:
     build: ./frontend/link_short

@@ -1,4 +1,4 @@
 FROM nginx
-RUN mkdir /index
-COPY index.html /index/index.html
+RUN mkdir /etc/nginx/ssl
+COPY ssl /etc/nginx/ssl
 COPY nginx.conf /etc/nginx/conf.d/default.conf
